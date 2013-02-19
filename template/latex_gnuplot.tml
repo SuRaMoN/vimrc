@@ -1,0 +1,31 @@
+
+# export to pdf
+set terminal pdf size 5, 3
+set output "plot.pdf"
+
+# european plot style
+set xtics nomirror
+set ytics nomirror
+set border 1 + 2
+
+# legend outside graph and with border
+set key box outside
+
+# Main title and axis names
+#set ylabel "Y-axis"
+#set xlabel "X-axis"
+#set title "Title"
+
+# lines and point
+set style data linespoints
+
+# user first row as title
+#set key autotitle columnhead
+
+# range of x-axis
+set xrange [-10:10]
+
+# plot actual data
+plot sin(x)/x
+#plot "data.dat" using 1:2, "data.dat" using 1:3
+

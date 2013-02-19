@@ -1,0 +1,28 @@
+C = pdflatex
+SOURCE = doc.tex
+BIN = doc.pdf
+DEP = 
+CFLAGS = -interaction=nonstopmode
+RM = rm -f
+
+.PHONY: $(BIN) default exec clean
+
+default:
+	[ -f "$(BIN)" ] || $(MAKE) -j 2 $(BIN)
+	$(MAKE) -j 2 $(BIN)
+
+%.pdf: %.gp
+	gnuplot $^
+
+%.pdf: %.dot
+	dot -Tpng -o$@ $^
+
+$(BIN): $(DEP)
+	$(C) $(CFLAGS) $(SOURCE)
+
+exec:
+	cmd /C start gsview32 $(BIN)
+
+clean:
+	$(RM) $(BIN) $(DEP) *.log *.toc *.aux
+

@@ -1,0 +1,14 @@
+CXX = mcs
+BIN = main.exe
+DIRS = .
+SRC = $(wildcard $(addsuffix /*.cs, $(DIRS)))
+RM = rm -f
+
+.PHONY: default exec
+
+default:
+	$(CXX) SRC
+
+exec:
+	./$(BIN) && read -p pause
+

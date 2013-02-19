@@ -1,0 +1,34 @@
+%preamble
+
+\documentclass[a4paper,12pt]{article}
+\usepackage[dutch]{babel}
+%\usepackage{hyperref}
+%\usepackage{graphicx}
+\pagestyle{myheadings}
+\markright{header title}
+
+%body
+
+\begin{document}
+
+\title{Title document}
+\author{Name author}
+\date{date document}
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Section1}
+body section 1
+%\includegraphics[width=\textwidth]{plot.pdf}
+
+\subsection{Subsection 1}
+bodu subsection1
+
+
+\end{document}
+

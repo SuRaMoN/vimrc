@@ -1,0 +1,68 @@
+
+.PHONY: default default_multicore clean app_ui.py app.py
+
+OBJ = $(patsubst %.ui,ui_%.py,$(wildcard *.ui)) $(patsubst %.ui,%.py,$(wildcard *.ui)) $(patsubst %.qrc,%_rc.py,$(wildcard *.qrc))
+RMOBJ = $(patsubst %.ui,ui_%.py,$(wildcard *.ui)) $(patsubst %.qrc,%_rc.py,$(wildcard *.qrc))
+RM = rm -f
+
+default:
+	@$(MAKE) -j 2 default_multicore
+
+default_multicore: $(OBJ)
+
+ui_%.py: %.ui
+	pyuic4 $^ -o $@
+
+%_rc.py: %.qrc
+	pyrcc4 $^ -o $@
+
+%.py: ui_%.py
+	if [ ! -e $@ ]; then \
+		echo > $@; \
+		echo "from PyQt4.QtGui import QMainWindow" >> $@; \
+		echo "from PyQt4.QtCore import pyqtSlot" >> $@; \
+		echo -n "from $$(basename '$^' .py) import " >> $@; \
+		grep -o "Ui_.*(object)" $^ | sed -e "s/(.*)//" >> $@; \
+		echo >> $@; \
+		echo >> $@; \
+		echo -n "class " >> $@; \
+		grep -o "Ui_.*(object)" $^ | sed -e "s/Ui_//" -e "s/(.*)//" | tr -d "\n" >> $@; \
+		echo "(QMainWindow):" >> $@; \
+		echo "    def __init__(self, parent=None):" >> $@; \
+		echo "        QMainWindow.__init__(self, parent)" >> $@; \
+		echo -n "        self.ui = " >> $@; \
+		grep -o "Ui_.*(object)" $^ | sed -e "s/(.*)/()/" >> $@; \
+		echo "        self.ui.setupUi(self)" >> $@; \
+		echo >> $@; \
+	fi
+	touch $@
+
+app_ui.py:
+	echo > $@; \
+	echo "from PyQt4 import QtCore, QtGui" >> $@; \
+	echo "import sys" >> $@; \
+	echo >> $@; \
+	echo "if __name__ == \"__main__\":" >> $@; \
+	echo "    app = QtGui.QApplication(sys.argv)" >> $@; \
+	echo "    MainWindow = QtGui.QMainWindow()" >> $@; \
+	echo "    ui = Ui_MainWindow()" >> $@; \
+	echo "    ui.setupUi(MainWindow)" >> $@; \
+	echo "    MainWindow.show()" >> $@; \
+	echo "    sys.exit(app.exec_())" >> $@; \
+	echo >> $@;
+
+app.py:
+	echo > $@; \
+	echo "from PyQt4 import QtCore, QtGui" >> $@; \
+	echo "import sys" >> $@; \
+	echo >> $@; \
+	echo "if __name__ == \"__main__\":" >> $@; \
+	echo "    app = QtGui.QApplication(sys.argv)" >> $@; \
+	echo "    window = MainWindow()" >> $@; \
+	echo "    window.show()" >> $@; \
+	echo "    sys.exit(app.exec_())" >> $@;
+	echo >> $@;
+
+clean:
+	$(RM) $(RMOBJ)
+
