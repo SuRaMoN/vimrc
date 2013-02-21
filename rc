@@ -62,6 +62,10 @@ map <c-e> :BufExplorer<ENTER>
 
 map <c-o> :CtrlP .<ENTER>
 
+" vim-fugitive: auto open quickfix list after Glog
+autocmd QuickFixCmdPost *grep* cwindow
+
+
 map <F2> :syntax on \| filetype plugin on \| filetype detect<ENTER>
 
 
