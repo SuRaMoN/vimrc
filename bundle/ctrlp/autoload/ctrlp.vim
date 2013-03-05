@@ -5,6 +5,8 @@
 " Version:       1.78
 " =============================================================================
 
+if !exists("g:on_rooter_change") | let g:on_rooter_change = [] | endif
+
 " ** Static variables {{{1
 " s:ignore() {{{2
 fu! s:ignore()
@@ -50,6 +52,8 @@ fu! s:ignore()
 		\ 'file': '\v'.join(igfiles, '|'),
 		\ }
 endf
+
+
 " Script local vars {{{2
 let [s:pref, s:bpref, s:opts, s:new_opts, s:lc_opts] =
 	\ ['g:ctrlp_', 'b:ctrlp_', {
@@ -1361,6 +1365,7 @@ fu! ctrlp#dirnfile(entries)
 	let [items, cwd] = [[[], []], s:dyncwd.s:lash()]
 	for each in a:entries
 		let etype = getftype(each)
+		if s:global_ignore(each, etype, cwd) | con | en
 		if s:igntype >= 0 && s:usrign(each, etype) | con | en
 		if etype == 'dir'
 			if s:showhidden | if each !~ '[\/]\.\{1,2}$'
@@ -1380,6 +1385,18 @@ fu! ctrlp#dirnfile(entries)
 		en
 	endfo
 	retu items
+endf
+
+fu! s:global_ignore(item, type, cwd)
+	let item = strpart(a:item, strlen(a:cwd) - 1)
+	for [name, filter] in items(g:ctrlp_global_ignore)
+		if s:igntype == 1
+			if item =~ filter | return 1 | endif
+		elseif s:igntype == 4 && has_key(filter, a:type) && filter[a:type] != ''
+			if item =~ filter[a:type] | return 1 | endif
+		endif
+	endfor
+	return 0
 endf
 
 fu! s:usrign(item, type)
@@ -2069,6 +2086,10 @@ fu! ctrlp#setlines(...)
 endf
 
 fu! ctrlp#init(type, ...)
+	for callback in g:on_rooter_change
+		exec "call " . callback
+	endfor
+
 	if exists('s:init') || s:iscmdwin() | retu | en
 	let [s:ermsg, v:errmsg] = [v:errmsg, '']
 	let [s:matches, s:init] = [1, 1]

@@ -198,7 +198,11 @@ an 8600.17.30.10 SuRactions.Idioms.PHP.set\ makeprg=make :set makeprg=make<ENTER
 
 an 8600.19 SuRactions.-sep10- <Nop>
 
-an <silent> 8600.20 SuRactions.Create\ tags\ c/c++ :silent !find . -name "*.c" -o -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" <BAR> ctags --c++-kinds=+p --extra=+q --fields=+iaS -L -<CR>
+an <silent> 8600.21 SuRactions.Hightight\ PREG\ meta\ chars :let @/='\\\@<!\(\\\\\)*\(' . join(['\^', '\$', '\.', '\[', '\]', '\|', '(', ')', '?', '\*', '+', '{', '}'], '\\|') . '\)'<CR>
+
+an 8600.24 SuRactions.-sep15- <Nop>
+
+an <silent> 8600.25 SuRactions.Create\ tags\ c/c++ :silent !find . -name "*.c" -o -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" <BAR> ctags --c++-kinds=+p --extra=+q --fields=+iaS -L -<CR>
 an <silent> 8600.29 SuRactions.Create\ tags\ java :silent !find . -name "*.java" <BAR> ctags --extra=+q --fields=+i -L -<CR>
 an <silent> 8600.30 SuRactions.Create\ tags\ PHP/js :silent !find . -name "*.php" -o -name "*.js" <BAR> ctags --extra=+q --fields=+i -L -<CR>
 an <silent> 8600.30 SuRactions.Create\ classlist\ PHP/js :silent !grep -hR '^use ' . <BAR> sort <BAR> uniq -c <BAR> sort -nr <BAR> cut -b 9- > classes<CR>

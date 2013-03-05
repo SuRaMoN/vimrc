@@ -17,6 +17,8 @@ let [g:ctrlp_lines, g:ctrlp_allfiles, g:ctrlp_alltags, g:ctrlp_alldirs,
 if !exists('g:ctrlp_map') | let g:ctrlp_map = '<c-p>' | en
 if !exists('g:ctrlp_cmd') | let g:ctrlp_cmd = 'CtrlP' | en
 
+if !exists("g:ctrlp_global_ignore") | let g:ctrlp_global_ignore = {} | endif
+
 com! -n=? -com=custom,ctrlp#utils#dircompl CtrlP
 	\ cal ctrlp#init(0, { 'dir': <q-args> })
 

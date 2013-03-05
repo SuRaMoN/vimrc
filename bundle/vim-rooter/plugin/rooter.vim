@@ -50,6 +50,7 @@
 "
 " Boilerplate
 "
+if !exists("g:on_rooter_change") | let g:on_rooter_change = [] | endif
 
 if exists("g:loaded_rooter")
   finish
@@ -129,6 +130,9 @@ function! s:ChangeToRootDirectory()
     else
       exe ":cd " . fnameescape(root_dir)
     endif
+	for callback in g:on_rooter_change
+		exec "call " . callback
+	endfor
   endif
 endfunction
 

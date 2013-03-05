@@ -1,59 +1,32 @@
 
-fu! s:ignore()
-	let igdirs = [
-		\ '\.git',
-		\ '\.hg',
-		\ '\.svn',
-		\ '_darcs',
-		\ '\.bzr',
-		\ '\.cdv',
-		\ '\~\.dep',
-		\ '\~\.dot',
-		\ '\~\.nib',
-		\ '\~\.plst',
-		\ '\.pc',
-		\ '_MTN',
-		\ 'blib',
-		\ 'CVS',
-		\ 'RCS',
-		\ 'SCCS',
-		\ '_sgbak',
-		\ 'autom4te\.cache',
-		\ 'cover_db',
-		\ '_build',
-		\ ]
-	let igfiles = [
-		\ '\~$',
-		\ '#.+#$',
-		\ '[._].*\.swp$',
-		\ 'core\.\d+$',
-		\ '\.exe$',
-		\ '\.so$',
-		\ '\.bak$',
-		\ '\.png$',
-		\ '\.jpg$',
-		\ '\.gif$',
-		\ '\.zip$',
-		\ '\.rar$',
-		\ '\.tar\.gz$',
-		\ ]
-	retu {
-		\ 'dir': '\v[\/]('.join(igdirs, '|').')$',
-		\ 'file': '\v'.join(igfiles, '|'),
+
+
+if !exists('g:ctrlp_global_ignore') | let g:ctrlp_global_ignore = {} | endif
+
+if !exists("g:on_rooter_change") | let g:on_rooter_change = [] | endif
+
+call add(g:on_rooter_change, "g:reload_icontroller()")
+
+fu! g:reload_icontroller()
+	if filereadable(".git/FETCH_HEAD")
+		for line in readfile(".git/FETCH_HEAD")
+			if line =~ 'Credico/ic.platform' || line =~ 'SuRaMoN/ic.platform'
+				call g:load_icontroller()
+				return
+			endif
+		endfor
+	endif
+	call g:unload_icontroller()
+endf
+
+fu! g:load_icontroller()
+	let g:ctrlp_global_ignore['icontroller'] = {
+		\ 'dir': '^/userdata\|^/doc\|^/build\|^/cache\|^/plugins\|^/uploads\|^/vendor',
 		\ }
 endf
 
-if exists("g:syntax_on")
-	let g:ctrlp_custom_ignore = s:ignore()
-endif
+fu! g:unload_icontroller()
+	let g:ctrlp_global_ignore['icontroller'] = {}
+endf
 
-let g:ctrlp_custom_ignore['dir'] .= '|' . join([
- \  '/home/matthias/public_html/ic.platform/userdata',
- \  '/home/matthias/public_html/ic.platform/doc',
- \  '/home/matthias/public_html/ic.platform/build',
- \  '/home/matthias/public_html/ic.platform/cache',
- \  '/home/matthias/public_html/ic.platform/plugins',
- \  '/home/matthias/public_html/ic.platform/uploads',
- \  '/home/matthias/public_html/ic.platform/vendor',
- \  ], '|')
 
