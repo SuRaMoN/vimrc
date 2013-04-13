@@ -205,7 +205,7 @@
 "           \ " * Get %varname%.\n" .
 "           \ " * @return %varname%\n" .
 "           \ " */\n" .
-"           \ "%function %funcname%() { return $this->%varname%; }"
+"           \ "%public function %funcname%() { return $this->%varname%; }"
 "
 "     The defaults for these variables are defined in the script.  For
 "     both the getterTemplate and setterTemplate, there is a corresponding
@@ -259,7 +259,7 @@ else
     \ " *\n" .
     \ " * @return %varname%.\n" .
     \ " */\n" .
-    \ "function %funcname%()\n" .
+    \ "public function %funcname%()\n" .
     \ "{\n" .
     \ "    return $this->%varname%;\n" .
     \ "}"
@@ -277,7 +277,7 @@ else
   \ " *\n" .
   \ " * @param %varname% the value to set.\n" . 
   \ " */\n" .
-  \ "function %funcname%($%varname%)\n" .
+  \ "public function %funcname%($%varname%)\n" .
   \ "{\n" .
   \ "    $this->%varname% = $%varname%;\n" .
   \ "}"
