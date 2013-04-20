@@ -204,7 +204,7 @@ an 8600.24 SuRactions.-sep15- <Nop>
 
 an <silent> 8600.25 SuRactions.Create\ tags\ c/c++ :silent !find . -name "*.c" -o -name "*.cc" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" <BAR> ctags --c++-kinds=+p --extra=+q --fields=+iaS -L -<CR>
 an <silent> 8600.29 SuRactions.Create\ tags\ java :silent !find . -name "*.java" <BAR> ctags --extra=+q --fields=+i -L -<CR>
-an <silent> 8600.30 SuRactions.Create\ tags\ PHP/js :silent !find . -name "*.php" -o -name "*.js" <BAR> ctags --fields=+i -L -<CR>
+an <silent> 8600.30 SuRactions.Create\ tags\ PHP/js :silent !find . -name "*.php" <BAR> ctags --fields=-a -L - -f - <BAR> grep -Ev '(d<BAR>j<BAR>v<BAR>f)$' > tags<CR>
 an <silent> 8600.30 SuRactions.Create\ classlist\ PHP/js :silent !grep -hR '^use ' . <BAR> sort <BAR> uniq -c <BAR> sort -nr <BAR> cut -b 9- > classes<CR>
 an <silent> 8600.30 SuRactions.Create\ services\ list\ symfony2 :silent !find -name "services.xml" -exec grep 'id=' '{}' ';' <BAR> grep -o 'id="[^"]*"' <BAR> cut -d '"' -f 2 > dictionary<CR>
 
