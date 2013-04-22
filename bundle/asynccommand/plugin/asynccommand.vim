@@ -24,7 +24,7 @@ if &cp
     echoerr "AsyncCommand cannot run in vi-compatible mode (see :help 'cp')."
     finish
 elseif !has('clientserver')
-    echoerr "AsyncCommand requires vim compiled with +clientserver (see :help +clientserver)"
+    "echoerr "AsyncCommand requires vim compiled with +clientserver (see :help +clientserver)"
     finish
 endif
 

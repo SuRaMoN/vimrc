@@ -17,12 +17,14 @@ function! phpcomplete#getVimAutoCompleteFileValue(forClass)
 	if filereadable(".vimAutoComplete")
 		for line in readfile(".vimAutoComplete")
 			let splittedLine = split(line, ':')
-			let className = splittedLine[0]
-			let functionName = splittedLine[1]
-			if ! has_key(g:vimAutoCompleteFileCache, className)
-				let g:vimAutoCompleteFileCache[className] = []
+			if len(splittedLine) > 1
+				let className = splittedLine[0]
+				let functionName = splittedLine[1]
+				if ! has_key(g:vimAutoCompleteFileCache, className)
+					let g:vimAutoCompleteFileCache[className] = []
+				endif
+				call add(g:vimAutoCompleteFileCache[className], {functionName . '(': ''})
 			endif
-			call add(g:vimAutoCompleteFileCache[className], {functionName . '(': ''})
 		endfor
 	endif
 

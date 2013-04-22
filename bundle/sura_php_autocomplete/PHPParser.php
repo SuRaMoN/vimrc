@@ -1,8 +1,5 @@
 <?php
 
-namespace ns;
-
-
 class PHPParser
 {
 	protected $tokens;
@@ -15,6 +12,7 @@ class PHPParser
 	protected $autocompleteInfo = array();
 
 	public function __construct($filename) {
+		$filename = $filename instanceof SplFileInfo ? $filename->getRealPath() : $filename;
 		$tokens = token_get_all(file_get_contents($filename));
 		$this->tokens = $tokens;
 	}
@@ -90,16 +88,6 @@ class PHPParser
 	{
 		$parser = new self($file);
 		return $parser->parse();
-	}
-}
-
-
-foreach(PHPParser::getInfo($argv[1]) as $className => $functions) {
-	foreach($functions as $function) {
-		if(strpos($className, '\\') !== false) {
-			$className = substr($className, strrpos($className, '\\') + 1);
-		}
-		echo "$className:$function\n";
 	}
 }
 
