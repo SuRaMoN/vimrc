@@ -11,7 +11,7 @@ endfunction
 
 function! ResolveNamespaces()
 	let class = expand("<cword>")
-	execute "normal gg/class \<ENTER>kkko\<ESC>"
+	execute "normal gg/\\v(use|class)\\s\<ENTER>ko\<ESC>"
 	call setline(".", GetMatchingClass(class))
 	let @/ = ""
 endfunction
