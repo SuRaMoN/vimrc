@@ -5,7 +5,8 @@ snippet php
 snippet $this
 	$this->${1:field} = $$1;
 snippet constr
-	public function __construct(${1}) {
+	public function __construct(${1})
+	{
 		${2}
 	}
 snippet pro
@@ -217,7 +218,8 @@ snippet foreach
 		${3:// code...}
 	}
 snippet fun
-	${1:public }function ${2:FunctionName}(${3}) {
+	${1:public }function ${2:FunctionName}(${3})
+	{
 		${4:// code...}
 	}
 # $... = array (...)
@@ -229,7 +231,11 @@ snippet ibclass
 	namespace ${1:`substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\\', 'g')`};
 	
 	
-	class ${2:`Filename('', 'myClass')`} {
+	class ${2:`Filename('', 'myClass')`}
+	{
+		public function __construct()
+		{
+		}
 		${3}
 	}
 	
@@ -241,9 +247,37 @@ snippet ibtest
 	use Ibiller\CoreBundle\Tests\TestCase;
 	
 	
-	class ProfileTest extends TestCase {
+	class ProfileTest extends TestCase
+	{
 		/** @test */
-		public function testMainFunctionality() {
+		public function testMainFunctionality()
+		{
 		}
 	}
 	
+snippet icclass
+	<?php
+	
+	namespace ${1:`substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\\', 'g')`};
+	
+	
+	class ${2:`Filename('', 'myClass')`}
+	{
+		public function __construct()
+		{
+		}
+		${3}
+	}
+	
+snippet ictest
+	<?php
+
+	namespace ${1:`substitute(substitute(expand("%:p"), '.*ic.platform\/tests\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\\', 'g')`};
+
+	class ${2:`Filename('', 'myClass')`} extends \iController\TestConfiguration\AbstractSymfonyTest
+	{
+		/** @test */
+		public function testFunctionality()
+		{
+		}
+	}

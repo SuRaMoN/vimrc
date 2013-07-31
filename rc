@@ -52,13 +52,13 @@ runtime bundle/pathogen/pathogen.vim
 execute pathogen#infect()
 
 
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplUseSingleClick = 1
-noremap <C-RIGHT> :MBEbn<ENTER>
-noremap <C-LEFT> :MBEbp<ENTER>
+
+let g:buffergator_autoexpand_on_split = 0
+let g:buffergator_sort_regime = "mru"
+map <C-left> :BuffergatorOpen<ENTER>
+map <C-right> :BuffergatorOpen<ENTER>
 
 
-map <c-e> :BufExplorer<ENTER>
 
 map <c-o> :CtrlP .<ENTER>
 

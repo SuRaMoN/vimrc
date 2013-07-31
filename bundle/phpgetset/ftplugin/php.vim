@@ -658,7 +658,7 @@ if !exists("no_plugin_maps") && !exists("no_php_maps")
     \ :call <SID>InsertGetterSetter('s')<CR>
 
   if !hasmapto('<Plug>JavagetsetInsertBothGetterSetter')
-    map <unique> <buffer> <LocalLeader>b <Plug>JavagetsetInsertBothGetterSetter
+    "map <unique> <buffer> <LocalLeader>b <Plug>JavagetsetInsertBothGetterSetter
   endif
   noremap <buffer> <script> 
     \ <Plug>JavagetsetInsertBothGetterSetter
