@@ -1167,7 +1167,8 @@ function! s:NewBufferCatalogViewer()
 
             """"" Selection: show target and switch focus
             noremap <buffer> <silent> <CR>        :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
-            noremap <buffer> <silent> a        :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
+            noremap <buffer> <silent> <TAB>       :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
+            noremap <buffer> <silent> a           :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
             noremap <buffer> <silent> o           :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
             noremap <buffer> <silent> s           :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "vert sb")<CR>
             noremap <buffer> <silent> <C-v>       :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "vert sb")<CR>
@@ -1195,8 +1196,10 @@ function! s:NewBufferCatalogViewer()
             noremap <buffer> <silent> <C-@>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
             noremap <buffer> <silent> <C-N>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
             noremap <buffer> <silent> <C-right>   j
+            noremap <buffer> <silent> <C-TAB>     j
             noremap <buffer> <silent> <C-P>       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
             noremap <buffer> <silent> <C-left>    k
+            noremap <buffer> <silent> <C-S-TAB>   k
 
             """"" Preview: go to existing window showing target
             noremap <buffer> <silent> E           :<C-U>call b:buffergator_catalog_viewer.visit_open_target(1, !g:buffergator_autodismiss_on_select, "")<CR>

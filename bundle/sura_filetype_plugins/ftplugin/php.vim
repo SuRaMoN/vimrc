@@ -14,6 +14,8 @@ imap <silent> <F9> <ESC><F9>
 map <C-Q> ^ivar_dump(<ESC>$:.s/;$//e<ENTER>$a);<ESC>
 imap <C-Q> <ESC><C-Q>
 
+map gs :call GotoServiceDefinition()<ENTER>
+
 command! AddField execute "normal mayiw[{oprotected $;\<ESC>P`a]mo$this->\<ESC>pa = $;\<ESC>P`a"
 
 compiler phpunit

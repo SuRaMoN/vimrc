@@ -51,12 +51,18 @@ endif
 runtime bundle/pathogen/pathogen.vim
 execute pathogen#infect()
 
+let g:phpqa_messdetector_ruleset = "~/.phpmd.xml"
+let g:phpqa_codesniffer_autorun = 0
+let g:phpqa_codecoverage_autorun = 0
+let g:phpqa_messdetector_autorun = 0
 
 
 let g:buffergator_autoexpand_on_split = 0
 let g:buffergator_sort_regime = "mru"
-map <C-left> :BuffergatorOpen<ENTER>
 map <C-right> :BuffergatorOpen<ENTER>
+map <C-left> :BuffergatorOpen<ENTER>
+map <C-TAB> :BuffergatorOpen<ENTER>
+map <C-S-TAB> :BuffergatorOpen<ENTER>
 
 
 
