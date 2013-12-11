@@ -213,21 +213,6 @@ if (${1:/* condition */}) {
 $0
 endsnippet
 
-snippet class "Class declaration template" !b
-/**
- * Class ${1:`!p snip.rv=snip.fn.capitalize().split('.')[0]`} 
- * @author $2
- */
-class $1
-{
-    public function ${3:__construct}(${4:$options})
-    {
-        ${4:// code}
-    }
-}
-$0
-endsnippet
-
 snippet pr "Dumb debug helper in HTML"
 echo '<pre>' . var_export($1, 1) . '</pre>';$0
 endsnippet
@@ -261,7 +246,7 @@ snippet array "array"
 $${1:arrayName} = array('${2}' => ${3});${4}
 endsnippet
 
-snippet ibclass "ibclass"
+snippet class "class"
 <?php
 
 namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
@@ -326,6 +311,20 @@ class ${2:`!v Filename('', 'myClass')`} extends Exception
 
 endsnippet
 
+snippet exc "exc"
+<?php
+
+namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+
+use Exception;
+
+
+class ${2:`!v Filename('', 'myClass')`} extends Exception
+{
+}
+
+endsnippet
+
 snippet ictest "ictest"
 <?php
 
@@ -339,8 +338,7 @@ class ${2:`!v Filename('', 'myClass')`} extends \iController\TestConfiguration\A
     public function setup()
     {
 		$this->previousErrorReporting = error_reporting(E_ALL);
-        $this->truncateTables(array(
-		));
+        $this->deleteFromAllTables();
     }
 
     public function tearDown()
@@ -451,6 +449,13 @@ class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\Task\Ba
     }
 }
 
+endsnippet
+
+snippet testfun "phpunit test function"
+/** @test */
+public function test${1:Functionality}()
+{
+}
 endsnippet
 
 # :vim:ft=snippets:

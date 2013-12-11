@@ -76,7 +76,9 @@ function! PhpSwitchToImplIcontroller()
 	let file_name = expand("%:p")
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/iController/Platform/Tests/\(.*\)Test\.php', '\1/src/iController/Platform/\2.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/iController/lib/Model/\(.*\)Test\.php', '\1/lib/model/\2.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/tests/Customer/[^/]*/Import\(.*\)Test\.php', '\1/lib/task/import\2Task.class.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/Customer/\(.*\)Test\.php', '\1/src/Customer/\2.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/tests/frontend/modules/\(.*\)/.*ActionsTest.php', '\1/apps/frontend/modules/\2/actions/actions.class.php', "")
 	execute ':e ' . file_name
 endfunction
 
@@ -84,7 +86,9 @@ function! PhpSwitchToTestIcontroller()
 	let file_name = expand("%:p")
 	let file_name = substitute(file_name, '\(.\{-}\)/src/iController/Platform/\(.*\)\.php', '\1/tests/iController/Platform/Tests/\2Test.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/lib/model/\(.*\)\.php', '\1/tests/iController/lib/Model/\2Test.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/lib/task/import\(.*\)Task\.class\.php', '\1/tests/Customer/\2/Import\2Test.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/src/Customer/\(.*\)\.php', '\1/tests/Customer/\2Test.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/apps/frontend/modules/\(.*\)/actions/actions.class.php', '\1/tests/frontend/modules/\2/\u\2ActionsTest.php', "")
 	execute ':e ' . file_name
 endfunction
 
