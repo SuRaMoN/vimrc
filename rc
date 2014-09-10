@@ -47,6 +47,7 @@ if !exists("allow_all_charset")
 	set fileencodings=latin1
 endif
 
+cmap w!! %!sudo tee > /dev/null %
 
 runtime bundle/pathogen/pathogen.vim
 execute pathogen#infect()

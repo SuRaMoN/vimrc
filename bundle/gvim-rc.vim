@@ -68,6 +68,7 @@ an 8600.17.10.10.20 SuRactions.Idioms.C/C++.C++\ libraries.boost\ C++ /^CPPFLAGS
 an 8600.17.10.20 SuRactions.Idioms.C/C++.Header\ file\ macro ggO#ifndef =toupper(substitute(expand("%:t"), "[^a-zA-Z0-9_]", "_", "g"))#define =toupper(substitute(expand("%:t"), "[^a-zA-Z0-9_]", "_", "g"))Go#endif
 
 an 8600.17.20.005 SuRactions.Idioms.HTML.XHTML\ Strict\ template ggi<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html><head><title></title></head><body></body></html>j
+an 8600.17.20.005 SuRactions.Idioms.HTML.HTML5\ template ggi<!DOCTYPE html><html><head><title></title></head><body></body></html>j
 an 8600.17.20.010 SuRactions.Idioms.HTML.<?xml\ version ggO<?xml version="1.0" encoding="utf-8"?>j
 an 8600.17.20.020 SuRactions.Idioms.HTML.Doctype\ XHTML\ strict 2GO<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">j
 an 8600.17.20.030 SuRactions.Idioms.HTML.Doctype\ XHTML\ transitional 2GO<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">j

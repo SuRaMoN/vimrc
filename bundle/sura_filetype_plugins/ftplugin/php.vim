@@ -16,7 +16,7 @@ imap <C-Q> <ESC><C-Q>
 
 map gs :call GotoServiceDefinition()<ENTER>
 
-command! AddField execute "normal mayiw[{oprotected $;\<ESC>P`a]mo$this->\<ESC>pa = $;\<ESC>P`a"
+command! AddField execute "normal mayiw[{oprivate $;\<ESC>P`a]mo$this->\<ESC>pa = $;\<ESC>P`a"
 
 compiler phpunit
 set foldmethod=marker

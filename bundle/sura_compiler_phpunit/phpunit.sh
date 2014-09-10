@@ -8,5 +8,9 @@ echo $parts[0], implode('', array_reverse(array_slice($parts, 1, -1))), $parts[c
 END
 );
 
-phpunit $* 2>&1 | php -r "$PHPSCRIPT"
+OPTIONS=
+if [ -f app/phpunit.xml.dist ]; then
+	OPTIONS="-c app/phpunit.xml.dist"
+fi
+phpunit $OPTIONS $* 2>&1 | php -r "$PHPSCRIPT"
 

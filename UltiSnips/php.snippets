@@ -161,7 +161,7 @@ $5
 endsnippet
 
 snippet profun "Protected function" !b
-protected function ${1:name}(${2:$param})
+protected function ${1:name}(${2})
 {
     ${VISUAL}${3:return null;}
 }
@@ -333,19 +333,6 @@ namespace ${3:`!v substitute(substitute(expand("%:p"), '.*ic.platform\/tests\/\(
 
 class ${2:`!v Filename('', 'myClass')`} extends \iController\TestConfiguration\AbstractSymfonyTest
 {
-	protected $previousErrorReporting;
-
-    public function setup()
-    {
-		$this->previousErrorReporting = error_reporting(E_ALL);
-        $this->deleteFromAllTables();
-    }
-
-    public function tearDown()
-    {
-		error_reporting($this->previousErrorReporting);
-	}
-
 	/** @test */
 	public function ${1:testFunctionality}()
 	{
@@ -432,20 +419,24 @@ class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\Task\Ba
 {
     protected function configure()
 	{
-        $this->addOptions(array(
-            new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'propel'),
-            new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'prod'),
-        ));
-
-        $this->namespace = '';
-        $this->name = '';
-        $this->briefDescription = '';
-        $this->detailedDescription = '';
+        $this->namespace = '$1';
+        $this->name = '$2';
     }
 
     protected function execute($arguments = array(), $options = array())
     {
-		$this->initDatabase($options);
+    }
+}
+
+endsnippet
+
+snippet icaction "Symfony1 action for iControllah"
+<?php
+
+class ${1:`!v substitute(expand("%:p"), '.*\/\(.*\)\/actions\/actions.class.php', '\1', '')`}Actions extends \iController\Platform\Symfony1\Action\BaseActions
+{
+    public function execute(sfWebRequest $request)
+    {
     }
 }
 
@@ -456,6 +447,14 @@ snippet testfun "phpunit test function"
 public function test${1:Functionality}()
 {
 }
+endsnippet
+
+snippet sf "simplefixtures"
+$sf = $this->simpleFixtures();
+endsnippet
+
+snippet co "container"
+$container = $this->getContainer();
 endsnippet
 
 # :vim:ft=snippets:
