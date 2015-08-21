@@ -33,7 +33,12 @@ set hid
 set confirm
 set clipboard+=unnamed
 set visualbell
-set iskeyword+=.
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+autocmd FileType php setlocal iskeyword+=.
 
 if has("unix")
 	set shell=bash
