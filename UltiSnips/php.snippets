@@ -259,7 +259,6 @@ class ${2:`!v Filename('', 'myClass')`}
 	}
 	${3}
 }
-
 endsnippet
 
 snippet ibtest "ibtest"
@@ -269,7 +268,6 @@ namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php
 
 use Ibiller\CoreBundle\Tests\TestCase;
 
-
 class ${2:`!v Filename('', 'myClass')`} extends TestCase
 {
 	/** @test */
@@ -278,14 +276,12 @@ class ${2:`!v Filename('', 'myClass')`} extends TestCase
 		${4}
 	}
 }
-
 endsnippet
 
 snippet icclass "icclass"
 <?php
 
 namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
-
 
 class ${2:`!v Filename('', 'myClass')`}
 {
@@ -294,7 +290,6 @@ class ${2:`!v Filename('', 'myClass')`}
 	}
 	${3}
 }
-
 endsnippet
 
 snippet icexc "icexc"
@@ -304,11 +299,9 @@ namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php
 
 use Exception;
 
-
 class ${2:`!v Filename('', 'myClass')`} extends Exception
 {
 }
-
 endsnippet
 
 snippet exc "exc"
@@ -318,18 +311,15 @@ namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php
 
 use Exception;
 
-
 class ${2:`!v Filename('', 'myClass')`} extends Exception
 {
 }
-
 endsnippet
 
 snippet ictest "ictest"
 <?php
 
 namespace ${3:`!v substitute(substitute(expand("%:p"), '.*ic.platform\/tests\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
-
 
 class ${2:`!v Filename('', 'myClass')`} extends \iController\TestConfiguration\AbstractSymfonyTest
 {
@@ -338,7 +328,21 @@ class ${2:`!v Filename('', 'myClass')`} extends \iController\TestConfiguration\A
 	{
 	}
 }
+endsnippet
 
+snippet icmigr "PHP migration for icontrollah"
+<?php
+
+namespace iController\Migrations;
+
+use iController\Platform\DatabaseMigrate\Migration;
+
+class ${1:`!v substitute(substitute(expand("%:t:r"), '\([0-9]*\)-\(.*\)', '\2\1', ''), '\(^\|-\)\(.\)', '\U\2', 'g')`} implements Migration
+{
+    public function __construct()
+    {
+    }
+}
 endsnippet
 
 snippet test "test"
@@ -348,7 +352,6 @@ namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/[tT]ests\/\(.*\)\/.*
 
 use PHPUnit_Framework_TestCase;
 
-
 class ${2:`!v Filename('', 'myClass')`} extends PHPUnit_Framework_TestCase
 {
 	/** @test */
@@ -356,7 +359,6 @@ class ${2:`!v Filename('', 'myClass')`} extends PHPUnit_Framework_TestCase
 	{
 	}
 }
-
 endsnippet
 
 
@@ -427,7 +429,6 @@ class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\Task\Ba
     {
     }
 }
-
 endsnippet
 
 snippet icaction "Symfony1 action for iControllah"
@@ -439,7 +440,6 @@ class ${1:`!v substitute(expand("%:p"), '.*\/\(.*\)\/actions\/actions.class.php'
     {
     }
 }
-
 endsnippet
 
 snippet testfun "phpunit test function"

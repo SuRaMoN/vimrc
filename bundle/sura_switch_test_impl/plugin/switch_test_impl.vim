@@ -80,6 +80,7 @@ function! PhpSwitchToImplIcontroller()
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/Customer/[^/]*/\(.*\)ImportTest\.php', '\1/lib/task/customers/\L\2\E/\L\2\EImportTask.class.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/Customer/\(.*\)Test\.php', '\1/src/Customer/\2.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/frontend/modules/\(.*\)/.*ActionsTest.php', '\1/apps/frontend/modules/\2/actions/actions.class.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/tests/frontend/modules/\(.*\)/.*ComponentsTest.php', '\1/apps/frontend/modules/\2/actions/components.class.php', "")
 	execute ':e ' . file_name
 endfunction
 
@@ -91,6 +92,7 @@ function! PhpSwitchToTestIcontroller()
 	let file_name = substitute(file_name, '\(.\{-}\)/lib/task/customers/\(.\)\(.*\)/\(.\)\(.*\)Task\.class\.php', '\1/tests/Customer/\U\2\E\3/\U\4\E\5Test.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/src/Customer/\(.*\)\.php', '\1/tests/Customer/\2Test.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/apps/frontend/modules/\(.*\)/actions/actions.class.php', '\1/tests/frontend/modules/\2/\u\2ActionsTest.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/apps/frontend/modules/\(.*\)/actions/components.class.php', '\1/tests/frontend/modules/\2/\u\2ComponentsTest.php', "")
 	execute ':e ' . file_name
 endfunction
 
