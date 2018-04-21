@@ -11,10 +11,10 @@ function! PhpToggleTestImpl()
 endfunction 
 
 function! PhpSwitchToImpl()
-	if exists("g:in_icontroller") && g:in_icontroller
-		call PhpSwitchToImplIcontroller()
-		return
-	endif
+	"if exists("g:in_icontroller") && g:in_icontroller
+		"call PhpSwitchToImplIcontroller()
+		"return
+	"endif
 
 	let file_name = expand("%:t")
 	let extension = expand("%:e")
@@ -40,10 +40,10 @@ function! PhpSwitchToImpl()
 endfunction
 
 function! PhpSwitchToTest()
-	if exists("g:in_icontroller") && g:in_icontroller
-		call PhpSwitchToTestIcontroller()
-		return
-	endif
+	"if exists("g:in_icontroller") && g:in_icontroller
+		"call PhpSwitchToTestIcontroller()
+		"return
+	"endif
 
 	let file_name = expand("%:t")
 	let extension = expand("%:e")

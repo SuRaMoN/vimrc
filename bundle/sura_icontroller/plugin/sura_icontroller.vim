@@ -10,7 +10,7 @@ let g:in_icontroller = 0
 fu! g:Reload_icontroller()
 	if filereadable(".git/FETCH_HEAD")
 		for line in readfile(".git/FETCH_HEAD")
-			if line =~ 'Credico/ic.platform' || line =~ 'SuRaMoN/ic.platform'
+			if line =~ 'phabricator.credico/diffusion/IC/icontroller' || line =~ 'phabricator.credico:matthias/iController'
 				call g:Load_icontroller()
 				return
 			endif

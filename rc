@@ -57,7 +57,8 @@ cmap w!! %!sudo tee > /dev/null %
 runtime bundle/pathogen/pathogen.vim
 execute pathogen#infect()
 
-let g:phpqa_messdetector_ruleset = "~/.phpmd.xml"
+let g:phpqa_codesniffer_cmd = "bin/phpcs"
+let g:phpqa_messdetector_cmd = "bin/phpmd"
 let g:phpqa_codesniffer_autorun = 0
 let g:phpqa_codecoverage_autorun = 0
 let g:phpqa_messdetector_autorun = 0

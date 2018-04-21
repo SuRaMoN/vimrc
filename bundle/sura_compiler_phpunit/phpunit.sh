@@ -12,5 +12,5 @@ OPTIONS=
 if [ -f app/phpunit.xml.dist ]; then
 	OPTIONS="-c app/phpunit.xml.dist"
 fi
-phpunit $OPTIONS $* 2>&1 | php -r "$PHPSCRIPT"
+vendor/bin/phpunit $OPTIONS $* 2>&1 | php -r "$PHPSCRIPT"
 

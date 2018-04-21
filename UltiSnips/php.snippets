@@ -270,11 +270,10 @@ use Ibiller\CoreBundle\Tests\TestCase;
 
 class ${2:`!v Filename('', 'myClass')`} extends TestCase
 {
-	/** @test */
-	public function ${3:testMainFunctionality}()
-	{
-		${4}
-	}
+    public function ${3:testMainFunctionality}()
+    {
+        ${4}
+    }
 }
 endsnippet
 
@@ -285,10 +284,10 @@ namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php
 
 class ${2:`!v Filename('', 'myClass')`}
 {
-	public function __construct()
-	{
-	}
-	${3}
+    public function __construct()
+    {
+    }
+    ${3}
 }
 endsnippet
 
@@ -323,10 +322,9 @@ namespace ${3:`!v substitute(substitute(expand("%:p"), '.*ic.platform\/tests\/\(
 
 class ${2:`!v Filename('', 'myClass')`} extends \iController\TestConfiguration\AbstractSymfonyTest
 {
-	/** @test */
-	public function ${1:testFunctionality}()
-	{
-	}
+    public function ${1:testFunctionality}()
+    {
+    }
 }
 endsnippet
 
@@ -337,9 +335,13 @@ namespace iController\Migrations;
 
 use iController\Platform\DatabaseMigrate\Migration;
 
-class ${1:`!v substitute(substitute(expand("%:t:r"), '\([0-9]*\)-\(.*\)', '\2\1', ''), '\(^\|-\)\(.\)', '\U\2', 'g')`} implements Migration
+class ${1:`!v substitute(substitute(expand("%:t:r"), '\([0-9]*\)-\(.*\)', '\2Migration\1', ''), '\(^\|-\)\(.\)', '\U\2', 'g')`} implements Migration
 {
     public function __construct()
+    {
+    }
+
+    public function migrate()
     {
     }
 }
