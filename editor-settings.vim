@@ -11,7 +11,7 @@ set sidescrolloff=4
 set ignorecase
 set smartcase " default searhc CI unless a capital is supplied
 set wildmenu
-set incsearch
+set incsearch " highlight search results while still typing query
 set hlsearch " highlight search results
 set shortmess+=It
 set nomore
@@ -31,16 +31,4 @@ set confirm
 set clipboard+=unnamed
 set visualbell
 set expandtab
-colorscheme solarized
-
-if has("unix")
-	set shell=bash
-endif
-
-if exists("+shellslash")
-	set shellslash
-endif
-
-if !exists("allow_all_charset")
-	set fileencodings=latin1
-endif
+set keymodel-=stopsel " down arrow works in visual selections

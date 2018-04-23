@@ -1,0 +1,209 @@
+## Snippets from SnipMate, taken from
+## https://github.com/scrooloose/snipmate-snippets.git
+
+snippet pub "Public function" !b
+public function ${1:name}(${2:$param})
+{
+    ${VISUAL}${3:return null;}
+}
+$0
+endsnippet
+
+snippet pri "Private function" !b
+private function ${1:name}(${2:$param})
+{
+    ${VISUAL}${3:return null;}
+}
+$0
+endsnippet
+
+snippet pro "Protected function" !b
+protected function ${1:name}(${2})
+{
+    ${VISUAL}${3:return null;}
+}
+$0
+endsnippet
+
+snippet statfun "Public static function" !b
+${3:public} static function ${1:name}(${2:$param})
+{
+    ${VISUAL}${4:return null;}
+}
+$5
+endsnippet
+
+snippet class "class"
+<?php
+
+namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+
+class ${2:`!v Filename('', 'myClass')`}
+{
+	public function __construct()
+	{
+	}
+	${3}
+}
+endsnippet
+
+snippet icclass "icclass"
+<?php
+
+namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+
+final class ${2:`!v expand("%:t:r")`}
+{
+    public function __construct()
+    {
+    }
+    ${3}
+}
+endsnippet
+
+snippet icexc "icexc"
+<?php
+
+namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+
+use Exception;
+
+final class ${2:`!v Filename('', 'myClass')`} extends Exception
+{
+}
+endsnippet
+
+snippet exc "exc"
+<?php
+
+namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+
+use Exception;
+
+final class ${2:`!v Filename('', 'myClass')`} extends Exception
+{
+}
+endsnippet
+
+snippet ictest "ictest"
+<?php
+
+namespace ${3:`!v substitute(substitute(expand("%:p"), '.*ic.platform\/tests\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+
+final class ${2:`!v Filename('', 'myClass')`} extends \iController\TestConfiguration\AbstractSymfonyTest
+{
+    public function ${1:testFunctionality}()
+    {
+    }
+}
+endsnippet
+
+snippet test "test"
+<?php
+
+namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/[tT]ests\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+
+use PHPUnit_Framework_TestCase;
+
+final class ${2:`!v Filename('', 'myClass')`} extends PHPUnit_Framework_TestCase
+{
+	public function testFunctionality()
+	{
+	}
+}
+endsnippet
+
+snippet icdepr "Depricated propel models"
+// depricated: use get${1:NewField}
+public function get${2:DepricatedField}()
+{
+	\iController\Platform\Helper\DepricationMailNotifier::notifiyDeprication();
+	return $this->get$1();
+}
+
+// depricated: use set$1
+public function set$2($3$`!p snip.rv = t[1][0:1].lower() + t[1][1:]`)
+{
+	\iController\Platform\Helper\DepricationMailNotifier::notifiyDeprication();
+	return $this->set$1($`!p snip.rv = t[1][0:1].lower() + t[1][1:]`);
+}
+endsnippet
+
+snippet icforw "Forward propel relation getter/setter"
+public function get${1:NewField}()
+{
+	return $this->get${2:OldField}();
+}
+
+public function set$1($3$`!p snip.rv = t[1][0:1].lower() + t[1][1:]`)
+{
+	return $this->set$2($`!p snip.rv = t[1][0:1].lower() + t[1][1:]`);
+}
+endsnippet
+
+snippet constr "Constructor"
+public function __construct(${1})
+{
+}
+endsnippet
+
+snippet icforwobj "Forward propel relation getter/setter fot objects"
+public function get${1:NewField}()
+{
+	$`!p snip.rv = t[1][0:1].lower() + t[1][1:]` = $this->get${2:OldField}();
+	if(null === $`!p snip.rv = t[1][0:1].lower() + t[1][1:]`) {
+		throw new EntityNotFoundException('Could not find `!p snip.rv = t[1][0:1].lower() + t[1][1:]` for $4 with id: ' . $this->getId());
+	}
+	return $`!p snip.rv = t[1][0:1].lower() + t[1][1:]`;
+}
+
+public function set$1($1 $3$`!p snip.rv = t[1][0:1].lower() + t[1][1:]`)
+{
+	return $this->set$2($`!p snip.rv = t[1][0:1].lower() + t[1][1:]`);
+}
+endsnippet
+
+
+snippet ictask "Symfony1 task for iControllah"
+<?php
+
+class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\Task\BaseTask
+{
+    protected function configure()
+	{
+        $this->namespace = '$1';
+        $this->name = '$2';
+    }
+
+    protected function execute($arguments = array(), $options = array())
+    {
+    }
+}
+endsnippet
+
+snippet icaction "Symfony1 action for iControllah"
+<?php
+
+class ${1:`!v substitute(expand("%:p"), '.*\/\(.*\)\/actions\/actions.class.php', '\1', '')`}Actions extends \iController\Platform\Symfony1\Action\BaseActions
+{
+    public function execute(sfWebRequest $request)
+    {
+    }
+}
+endsnippet
+
+snippet testfun "phpunit test function"
+public function test${1:Functionality}()
+{
+}
+endsnippet
+
+snippet sf "simplefixtures"
+$sf = $this->simpleFixtures();
+endsnippet
+
+snippet co "container"
+$container = $this->getContainer();
+endsnippet
+
+# :vim:ft=snippets:
