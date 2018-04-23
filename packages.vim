@@ -13,4 +13,6 @@ Plug 'w0rp/ale'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'afternoon/vim-phpunit'
 Plug 'noahfrederick/vim-composer'
+Plug 'gaffneyc/vim-cdargs'
+Plug 'bling/vim-airline'
 call plug#end()
