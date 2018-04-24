@@ -1,7 +1,7 @@
 
 source $VIMRUNTIME/mswin.vim
 source ~/.vim/packages.vim
-source ~/.vim/editor-settings.vim
 source ~/.vim/gui.vim
 source ~/.vim/various.vim
 source ~/.vim/key-mappings.vim
+source ~/.vim/editor-settings.vim

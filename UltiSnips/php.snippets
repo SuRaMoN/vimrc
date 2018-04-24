@@ -68,7 +68,7 @@ namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php
 
 use Exception;
 
-final class ${2:`!v Filename('', 'myClass')`} extends Exception
+final class ${2:`!v expand("%:t:r")`} extends Exception
 {
 }
 endsnippet
@@ -80,7 +80,7 @@ namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php
 
 use Exception;
 
-final class ${2:`!v Filename('', 'myClass')`} extends Exception
+final class ${2:`!v expand("%:t:r")`} extends Exception
 {
 }
 endsnippet
@@ -90,7 +90,7 @@ snippet ictest "ictest"
 
 namespace ${3:`!v substitute(substitute(expand("%:p"), '.*ic.platform\/tests\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
 
-final class ${2:`!v Filename('', 'myClass')`} extends \iController\TestConfiguration\AbstractSymfonyTest
+final class ${2:`!v expand("%:t:r")`} extends \iController\TestConfiguration\AbstractSymfonyTest
 {
     public function ${1:testFunctionality}()
     {
@@ -105,7 +105,7 @@ namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/[tT]ests\/\(.*\)\/.*
 
 use PHPUnit_Framework_TestCase;
 
-final class ${2:`!v Filename('', 'myClass')`} extends PHPUnit_Framework_TestCase
+final class ${2:`!v expand("%:t:r")`} extends PHPUnit_Framework_TestCase
 {
 	public function testFunctionality()
 	{
