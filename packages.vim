@@ -15,4 +15,5 @@ Plug 'afternoon/vim-phpunit'
 Plug 'noahfrederick/vim-composer'
 Plug 'gaffneyc/vim-cdargs'
 Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
 call plug#end()

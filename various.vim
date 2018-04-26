@@ -24,6 +24,10 @@ if has("unix")
 	set shell=bash
 endif
 
+if !has('gui_running')
+    unmap <c-z>
+endif
+
 if exists("+shellslash")
 	set shellslash
 endif

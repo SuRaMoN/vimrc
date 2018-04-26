@@ -21,3 +21,24 @@ fu! GotoServiceDefinition()
     endif
 endfu
 
+fu! SwitchSymfonyController()
+	if expand("%:t") =~ "actions\\.class\\.php$"
+        execute "normal mw"
+        execute "?n execute"
+        let line = substitute(getline("."), ".*n execute\\(\\w*\\).*", "\\l\\1", "") . "Success.php"
+        execute "normal 'w"
+        execute "e " . expand("%:p:h") . "/../templates/" . line
+	elseif expand("%:t") =~ "Success\\.php$"
+        execute "e " . expand("%:p:h") . "/../actions/actions.class.php"
+	elseif expand("%:t") =~ "_\\w*\\.php$"
+        execute "e " . expand("%:p:h") . "/../actions/components.class.php"
+	elseif expand("%:t") =~ "components\\.class\\.php$"
+        execute "normal mw"
+        execute "?n execute"
+        let line = "_" . substitute(getline("."), ".*n execute\\(\\w*\\).*", "\\l\\1", "") . ".php"
+        execute "normal 'w"
+        execute "e " . expand("%:p:h") . "/../templates/" . line
+    endif
+endfu
+map gi :call SwitchSymfonyController()<ENTER>
+
