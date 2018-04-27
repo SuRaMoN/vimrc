@@ -1,6 +1,14 @@
 ## Snippets from SnipMate, taken from
 ## https://github.com/scrooloose/snipmate-snippets.git
 
+snippet get "Getter" !b
+
+public function get${1:`!p snip.rv = t[1].title()`}()
+{
+    return $this->${1:name};
+}
+endsnippet
+
 snippet pub "Public function" !b
 public function ${1:name}(${2:$param})
 {

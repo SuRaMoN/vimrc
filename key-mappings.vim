@@ -1,4 +1,7 @@
 
+" leave visual mode on copy
+snoremap <C-C> <C-G>"+y<C-\><C-N>
+
 " gd: Goto Definition (for php classes)
 nmap gd <Plug>(composer-find)
 

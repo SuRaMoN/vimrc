@@ -16,12 +16,15 @@ let g:airline#extensions#tabline#enabled = 1 " enable ale support in airline sta
 " Dont show bopen buffers in airline
 let g:airline#extensions#tabline#enabled = 0
 
+" vim-fugitive: auto open quickfix list after Glog
+autocmd QuickFixCmdPost *grep* cwindow
+
 " color scheme
-colorscheme solarized " 
+colorscheme solarized
 
 " use bash instead of sh
 if has("unix")
-	set shell=bash
+    set shell=bash
 endif
 
 if !has('gui_running')
@@ -29,5 +32,5 @@ if !has('gui_running')
 endif
 
 if exists("+shellslash")
-	set shellslash
+    set shellslash
 endif
