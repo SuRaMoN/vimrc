@@ -11,6 +11,8 @@ function! PhpToggleTestImpl()
 endfunction 
 
 function! PhpSwitchToImpl()
+    call PhpSwitchToImplIcontroller()
+    return
 	"if exists("g:in_icontroller") && g:in_icontroller
 		"call PhpSwitchToImplIcontroller()
 		"return
@@ -40,6 +42,8 @@ function! PhpSwitchToImpl()
 endfunction
 
 function! PhpSwitchToTest()
+    call PhpSwitchToTestIcontroller()
+    return
 	"if exists("g:in_icontroller") && g:in_icontroller
 		"call PhpSwitchToTestIcontroller()
 		"return
@@ -74,8 +78,8 @@ endfunction
 
 function! PhpSwitchToImplIcontroller()
 	let file_name = expand("%:p")
-	let file_name = substitute(file_name, '\(.\{-}\)/tests/iController/Platform/Tests/\(.*\)Test\.php', '\1/src/iController/Platform/\2.php', "")
-	let file_name = substitute(file_name, '\(.\{-}\)/tests/iController/lib/Model/\(.*\)Test\.php', '\1/lib/model/\2.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/tests/iController/Platform/\(.*\)Test\.php', '\1/src/iController/Platform/\2.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/tests/lib/model/\(.*\)Test\.php', '\1/lib/model/\2.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/Customer/[^/]*/Import\(.*\)Test\.php', '\1/lib/task/import\2Task.class.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/Customer/[^/]*/\(.*\)ImportTest\.php', '\1/lib/task/customers/\L\2\E/\L\2\EImportTask.class.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/tests/Customer/\(.*\)Test\.php', '\1/src/Customer/\2.php', "")
@@ -86,8 +90,8 @@ endfunction
 
 function! PhpSwitchToTestIcontroller()
 	let file_name = expand("%:p")
-	let file_name = substitute(file_name, '\(.\{-}\)/src/iController/Platform/\(.*\)\.php', '\1/tests/iController/Platform/Tests/\2Test.php', "")
-	let file_name = substitute(file_name, '\(.\{-}\)/lib/model/\(.*\)\.php', '\1/tests/iController/lib/Model/\2Test.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/src/iController/Platform/\(.*\)\.php', '\1/tests/iController/Platform/\2Test.php', "")
+	let file_name = substitute(file_name, '\(.\{-}\)/lib/model/\(.*\)\.php', '\1/tests/lib/model/\2Test.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/lib/task/import\(.*\)Task\.class\.php', '\1/tests/Customer/\2/Import\2Test.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/lib/task/customers/\(.\)\(.*\)/\(.\)\(.*\)Task\.class\.php', '\1/tests/Customer/\U\2\E\3/\U\4\E\5Test.php', "")
 	let file_name = substitute(file_name, '\(.\{-}\)/src/Customer/\(.*\)\.php', '\1/tests/Customer/\2Test.php', "")
