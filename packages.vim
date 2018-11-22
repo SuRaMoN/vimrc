@@ -17,4 +17,6 @@ Plug 'tacahiroy/ctrlp-funky'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/BufOnly.vim'
+Plug 'peeja/vim-cdo'
+Plug 'junegunn/vader.vim'
 call plug#end()

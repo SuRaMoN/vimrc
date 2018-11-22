@@ -2,9 +2,6 @@
 " leave visual mode on copy
 snoremap <C-C> <C-G>"+y<C-\><C-N>
 
-" gd: Goto Definition (for php classes)
-nmap gd <Plug>(composer-find)
-
 " ctrl-l: opens Least recently used files
 map <C-L> :CtrlPMRUFiles<CR>
 
@@ -23,3 +20,9 @@ imap <silent> <F8> <ESC><F8>
 
 nmap <F9> :call PhpToggleTestImpl()<CR>
 imap <silent> <F9> <ESC><F9>
+
+" ALE errors next and previous
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+map <C-E> :cnext<CR>

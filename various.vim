@@ -3,7 +3,7 @@
 autocmd FileType php setlocal iskeyword+=.
 
 " async support for vim-test
-let test#strategy = "dispatch"
+let test#strategy = 'dispatch'
 
 " Ale for lint/QA tools changes
 let g:ale_php_phpcs_standard = 'tests/CodeSniffer/ruleset.xml'
@@ -15,10 +15,21 @@ let g:airline#extensions#tabline#enabled = 1 " enable ale support in airline sta
 let g:ale_php_phpcbf_standard = 'tests/CodeSniffer/ruleset.xml'
 let g:ale_lint_delay = 2000
 
+let g:ale_php_phpcs_options = '--exclude=Generic.Commenting.Todo'
 let g:ale_fixers = { 'php': ['phpcbf'] }
+let g:ale_pattern_options = {
+\   '.*/lib/model/om/Base.*\.php': {'ale_enabled': 0},
+\   '.*/vendor/.*': {'ale_enabled': 0},
+\}
 
 " Dont show bopen buffers in airline
 let g:airline#extensions#tabline#enabled = 0
+
+" Dont index userdata, uploads and vendor for CtrlP
+let g:ctrlp_custom_ignore = '\(ic.platform\|icontroller\)/\(vendor\|userdata\|uploads\)'
+
+" Testing if this speeds up vim after extensive usage
+let g:airline_highlighting_cache = 1
 
 " vim-fugitive: auto open quickfix list after Glog
 autocmd QuickFixCmdPost *grep* cwindow
@@ -27,7 +38,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 colorscheme solarized
 
 function! CtagsLoad()
-    exec ":Dispatch! ctags -R --fields=+aimlS --languages=php --kinds-php=-lvan"
+    exec ':Dispatch! ctags -R --fields=+aimlS --exclude=bin/composer.phar --languages=php --kinds-php=-lvan'
 endfunction
 command! CtagsLoad call CtagsLoad()
 
@@ -37,7 +48,7 @@ if executable('ag')
 endif
 
 " use bash instead of sh
-if has("unix")
+if has('unix')
     set shell=bash
 endif
 
@@ -45,6 +56,6 @@ if !has('gui_running')
     unmap <c-z>
 endif
 
-if exists("+shellslash")
+if exists('+shellslash')
     set shellslash
 endif

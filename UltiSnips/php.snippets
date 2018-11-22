@@ -10,7 +10,7 @@ public function get${1:`!p snip.rv = t[1].title()`}()
 endsnippet
 
 snippet pub "Public function" !b
-public function ${1:name}(${2:$param})
+public function ${1:name}()
 {
     ${VISUAL}${3:return null;}
 }
@@ -18,7 +18,7 @@ $0
 endsnippet
 
 snippet pri "Private function" !b
-private function ${1:name}(${2:$param})
+private function ${1:name}()
 {
     ${VISUAL}${3:return null;}
 }
@@ -34,7 +34,7 @@ $0
 endsnippet
 
 snippet statfun "Public static function" !b
-${3:public} static function ${1:name}(${2:$param})
+${3:public} static function ${1:name}()
 {
     ${VISUAL}${4:return null;}
 }
@@ -175,7 +175,7 @@ endsnippet
 snippet ictask "Symfony1 task for iControllah"
 <?php
 
-class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\Task\BaseTask
+final class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\Task\BaseTask
 {
     protected function configure()
 	{
@@ -183,7 +183,10 @@ class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\Task\Ba
         $this->name = '$2';
     }
 
-    protected function execute($arguments = array(), $options = array())
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute($arguments = [], $options = [])
     {
     }
 }
