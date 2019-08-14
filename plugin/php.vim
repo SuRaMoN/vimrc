@@ -28,7 +28,7 @@ fu! SwitchSymfonyController()
         let line = substitute(getline("."), ".*n execute\\(\\w*\\).*", "\\l\\1", "") . "Success.php"
         execute "normal 'w"
         execute "e " . expand("%:p:h") . "/../templates/" . line
-	elseif expand("%:t") =~ "Success\\.php$"
+	elseif expand("%:t") =~ "Success\\.php$" || expand("%:t") =~ "Success\\.phtml$"
         execute "e " . expand("%:p:h") . "/../actions/actions.class.php"
 	elseif expand("%:t") =~ "_\\w*\\.php$"
         execute "e " . expand("%:p:h") . "/../actions/components.class.php"

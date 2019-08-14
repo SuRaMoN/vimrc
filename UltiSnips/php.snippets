@@ -1,11 +1,38 @@
 ## Snippets from SnipMate, taken from
 ## https://github.com/scrooloose/snipmate-snippets.git
 
-snippet get "Getter" !b
+snippet var "Private var" !b
+/** @var $2 */
+private $$1;
+endsnippet
 
-public function get${1:`!p snip.rv = t[1].title()`}()
+snippet get "Getter" !b
+public function get${1:`!p snip.rv = t[1][0:1].upper() + t[1][1:]`}()
 {
     return $this->${1:name};
+}
+endsnippet
+
+snippet with "Wither" !b
+public function with${1:`!p snip.rv = t[1][0:1].upper() + t[1][1:]`}($2 $1): self
+{
+    $cloned = clone $this;
+    $this->$1 = $${1:name};
+    return $cloned;
+}
+endsnippet
+
+snippet getwith "getter & Wither" !bm
+public function get${1:`!p snip.rv = t[1][0:1].upper() + t[1][1:]`}(): $2
+{
+    return $this->$1;
+}
+
+public function with${1:`!p snip.rv = t[1][0:1].upper() + t[1][1:]`}($2 $$1): self
+{
+    $cloned = clone $this;
+    $cloned->$1 = $${1:name};
+    return $cloned;
 }
 endsnippet
 
