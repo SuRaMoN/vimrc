@@ -32,11 +32,20 @@ let g:ale_pattern_options = {
 \   '.*/vendor/.*': {'ale_enabled': 0},
 \}
 
-" goto definition
-nmap <C-LeftMouse> <LeftMouse><Plug>(coc-definition)
 
+" vim-lsp laguage server integration
+au User lsp_setup call lsp#register_server({
+     \ 'name': 'php-language-server',
+     \ 'cmd': {server_info->['php', expand('~/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php')]},
+     \ 'whitelist': ['php'],
+     \ })
+nmap <C-LeftMouse> <LeftMouse>:LspDefinition<CR>
+
+
+" goto definition
+"nmap <C-LeftMouse> <LeftMouse><Plug>(coc-definition)
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
 
 " yank list for fzf
 function! s:yank_list()

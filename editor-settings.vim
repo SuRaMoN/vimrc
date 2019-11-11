@@ -32,3 +32,4 @@ set visualbell
 set expandtab
 set keymodel-=stopsel " down arrow works in visual selections
 set tags+=tags,tags.vendors,tags.spl
+set guioptions-=T  " remove toolbar
