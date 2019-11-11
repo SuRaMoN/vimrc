@@ -1,0 +1,10 @@
+{
+  "suggest.autoTrigger": "trigger",
+  "languageserver": {
+    "phplang": {
+      "command": "php",
+      "args": ["/home/matthias/.config/composer/vendor/felixfbecker/language-server/bin/php-language-server.php", "--stdio"],
+      "filetypes": ["php"]
+    }
+  }
+}

@@ -3,10 +3,14 @@
 snoremap <C-C> <C-G>"+y<C-\><C-N>
 
 " ctrl-l: opens Least recently used files
-map <C-L> :CtrlPMRUFiles<CR>
+"map <C-L> :CtrlPMRUFiles<CR>
+map <C-L> :History<CR>
+map <C-P> :FZF<CR>
+smap <C-P> <ESC>:execute "FZF -q " @*<CR>
+map <C-Y> :FZFYank<CR>
 
 " ctrl-f: opens functions in current file
-nnoremap <C-f> :CtrlPFunky<Cr>
+"nnoremap <C-f> :CtrlPFunky<Cr>
 
 " specific mappings for tests
 nmap <F6> :w<CR>:TestNearest<CR>

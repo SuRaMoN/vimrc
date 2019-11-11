@@ -14,10 +14,10 @@ public function get${1:`!p snip.rv = t[1][0:1].upper() + t[1][1:]`}()
 endsnippet
 
 snippet with "Wither" !b
-public function with${1:`!p snip.rv = t[1][0:1].upper() + t[1][1:]`}($2 $1): self
+public function with${1:`!p snip.rv = t[1][0:1].upper() + t[1][1:]`}($2 $$1): self
 {
     $cloned = clone $this;
-    $this->$1 = $${1:name};
+    $cloned->$1 = $${1:name};
     return $cloned;
 }
 endsnippet
