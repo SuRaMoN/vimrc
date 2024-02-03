@@ -25,7 +25,7 @@ fu! SwitchSymfonyController()
 	if expand("%:t") =~ "actions\\.class\\.php$"
         execute "normal mw"
         execute "?n execute"
-        let line = substitute(getline("."), ".*n execute\\(\\w*\\).*", "\\l\\1", "") . "Success.php"
+        let line = substitute(getline("."), ".*n execute\\(\\w*\\).*", "\\l\\1", "") . "Success.phtml"
         execute "normal 'w"
         execute "e " . expand("%:p:h") . "/../templates/" . line
 	elseif expand("%:t") =~ "Success\\.php$" || expand("%:t") =~ "Success\\.phtml$"
@@ -35,7 +35,7 @@ fu! SwitchSymfonyController()
 	elseif expand("%:t") =~ "components\\.class\\.php$"
         execute "normal mw"
         execute "?n execute"
-        let line = "_" . substitute(getline("."), ".*n execute\\(\\w*\\).*", "\\l\\1", "") . ".php"
+        let line = "_" . substitute(getline("."), ".*n execute\\(\\w*\\).*", "\\l\\1", "") . ".phtml"
         execute "normal 'w"
         execute "e " . expand("%:p:h") . "/../templates/" . line
     endif

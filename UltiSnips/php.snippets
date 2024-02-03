@@ -1,6 +1,113 @@
 ## Snippets from SnipMate, taken from
 ## https://github.com/scrooloose/snipmate-snippets.git
 
+global !p
+
+def php_upcase_first_letter(s):
+    if len(s) == 0:
+	    return ""
+    return s[0].upper() + s[1:]
+
+def php_parse_arguments(argumentsAsString):
+    arguments = []
+    for argument in argumentsAsString.split(","):
+        if len(argument.strip()) == 0:
+            continue
+        parts = argument.strip().split(" ")
+        if len(parts) == 1:
+            arguments.append({"type": "", "name": parts[0].strip("$")})
+        if len(parts) == 2:
+            arguments.append({"type": parts[0], "name": parts[1].strip("$")})
+    return arguments
+
+def php_construct_body_from_arguments(argumentsAsString):
+    arguments = php_parse_arguments(argumentsAsString)
+    if len(arguments) == 0:
+        return ""
+    body = ""
+    for argument in arguments:
+        body += "\n        $this->" + argument["name"] + " = $" + argument["name"] + ";"
+    return body
+
+def php_properties_from_arguments(argumentsAsString):
+    arguments = php_parse_arguments(argumentsAsString)
+    if len(arguments) == 0:
+        return ""
+    body = ""
+    for argument in arguments:
+        body += "\n    /** @var " + argument["type"] + " */"
+        body += "\n    private $" + argument["name"] + ";\n"
+    return body
+
+def php_getters_from_arguments(argumentsAsString, includeWithers):
+    arguments = php_parse_arguments(argumentsAsString)
+    if len(arguments) == 0:
+        return ""
+    body = ""
+    for argument in arguments:
+        returnTypeHint = ""
+        body += "\n"
+        if len(argument["type"]) > 0:
+            returnTypeHint = ": " + argument["type"]
+        else:
+            body += "\n    /**"
+            body += "\n     * @return " + argument["type"]
+            body += "\n     */"
+        body += "\n    public function get" + php_upcase_first_letter(argument["name"]) + "()" + returnTypeHint
+        body += "\n    {"
+        body += "\n        return $this->" + argument["name"] + ";"
+        body += "\n    }"
+        if includeWithers:
+            body += "\n"
+            paramTypeHint = ""
+            if len(argument["type"]) > 0:
+                paramTypeHint = argument["type"] + " "
+            else:
+                body += "\n    /**"
+                body += "\n     * @param "
+                body += "\n     */"
+            body += "\n    public function with" + php_upcase_first_letter(argument["name"]) + "(" + paramTypeHint + "$" + argument["name"] + "): self"
+            body += "\n    {"
+            body += "\n        $cloned = clone $this;"
+            body += "\n        $cloned->" + argument["name"] + " = $" + argument["name"] + ";"
+            body += "\n        return $cloned;"
+            body += "\n    }"
+    return body
+
+endglobal
+
+snippet icvo "iController value object"
+<?php
+
+namespace `!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`;
+
+/**
+ * 
+ */
+final class `!v expand("%:t:r")`
+{`!p snip.rv = php_properties_from_arguments(t[1])`
+    public function __construct(${1:arguments})
+    {`!p snip.rv = php_construct_body_from_arguments(t[1])`
+    }`!p snip.rv = php_getters_from_arguments(t[1], False)`
+}
+endsnippet
+
+snippet icvowith "iController value object with getters"
+<?php
+
+namespace `!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`;
+
+/**
+ * 
+ */
+final class `!v expand("%:t:r")`
+{`!p snip.rv = php_properties_from_arguments(t[1])`
+    public function __construct(${1:arguments})
+    {`!p snip.rv = php_construct_body_from_arguments(t[1])`
+    }`!p snip.rv = php_getters_from_arguments(t[1], True)`
+}
+endsnippet
+
 snippet var "Private var" !b
 /** @var $2 */
 private $$1;
@@ -52,80 +159,52 @@ private function ${1:name}()
 $0
 endsnippet
 
-snippet pro "Protected function" !b
-protected function ${1:name}(${2})
+snippet pubstatfun "Public static function" !b
+public static function ${1:name}()
 {
-    ${VISUAL}${3:return null;}
 }
-$0
 endsnippet
 
-snippet statfun "Public static function" !b
-${3:public} static function ${1:name}()
+snippet pristatfun "Private static function" !b
+private static function ${1:name}()
 {
-    ${VISUAL}${4:return null;}
 }
-$5
 endsnippet
 
 snippet class "class"
 <?php
 
-namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+namespace `!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`;
 
-class ${2:`!v Filename('', 'myClass')`}
+/**
+ * 
+ */
+final class `!v Filename('', 'myClass')`
 {
-	public function __construct()
-	{
-	}
-	${3}
+    ${1}
 }
 endsnippet
 
 snippet icclass "icclass"
 <?php
 
-namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+namespace `!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`;
 
-final class ${2:`!v expand("%:t:r")`}
+/**
+ * 
+ */
+final class `!v expand("%:t:r")`
 {
-    public function __construct()
-    {
-    }
     ${3}
-}
-endsnippet
-
-snippet icexc "icexc"
-<?php
-
-namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
-
-use Exception;
-
-final class ${2:`!v expand("%:t:r")`} extends Exception
-{
-}
-endsnippet
-
-snippet exc "exc"
-<?php
-
-namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/src\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
-
-use Exception;
-
-final class ${2:`!v expand("%:t:r")`} extends Exception
-{
 }
 endsnippet
 
 snippet ictest "ictest"
 <?php
 
-namespace ${3:`!v substitute(substitute(expand("%:p"), '.*ic.platform\/tests\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
+namespace `!v substitute(substitute(expand("%:p"), '.*ic.platform\/tests\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`;
 
-final class ${2:`!v expand("%:t:r")`} extends \iController\TestConfiguration\AbstractSymfonyTest
+final class `!v expand("%:t:r")` extends \iController\TestConfiguration\AbstractSymfonyTest
 {
     public function ${1:testFunctionality}()
     {
@@ -133,46 +212,15 @@ final class ${2:`!v expand("%:t:r")`} extends \iController\TestConfiguration\Abs
 }
 endsnippet
 
-snippet test "test"
-<?php
-
-namespace ${1:`!v substitute(substitute(expand("%:p"), '.*\/[tT]ests\/\(.*\)\/.*\.php', '\1', ''), '\/', '\\', 'g')`};
-
-use PHPUnit_Framework_TestCase;
-
-final class ${2:`!v expand("%:t:r")`} extends PHPUnit_Framework_TestCase
-{
-	public function testFunctionality()
-	{
-	}
-}
-endsnippet
-
-snippet icdepr "Depricated propel models"
-// depricated: use get${1:NewField}
-public function get${2:DepricatedField}()
-{
-	\iController\Platform\Helper\DepricationMailNotifier::notifiyDeprication();
-	return $this->get$1();
-}
-
-// depricated: use set$1
-public function set$2($3$`!p snip.rv = t[1][0:1].lower() + t[1][1:]`)
-{
-	\iController\Platform\Helper\DepricationMailNotifier::notifiyDeprication();
-	return $this->set$1($`!p snip.rv = t[1][0:1].lower() + t[1][1:]`);
-}
-endsnippet
-
 snippet icforw "Forward propel relation getter/setter"
 public function get${1:NewField}()
 {
-	return $this->get${2:OldField}();
+    return $this->get${2:OldField}();
 }
 
 public function set$1($3$`!p snip.rv = t[1][0:1].lower() + t[1][1:]`)
 {
-	return $this->set$2($`!p snip.rv = t[1][0:1].lower() + t[1][1:]`);
+    return $this->set$2($`!p snip.rv = t[1][0:1].lower() + t[1][1:]`);
 }
 endsnippet
 
@@ -185,16 +233,16 @@ endsnippet
 snippet icforwobj "Forward propel relation getter/setter fot objects"
 public function get${1:NewField}()
 {
-	$`!p snip.rv = t[1][0:1].lower() + t[1][1:]` = $this->get${2:OldField}();
-	if(null === $`!p snip.rv = t[1][0:1].lower() + t[1][1:]`) {
-		throw new EntityNotFoundException('Could not find `!p snip.rv = t[1][0:1].lower() + t[1][1:]` for $4 with id: ' . $this->getId());
-	}
-	return $`!p snip.rv = t[1][0:1].lower() + t[1][1:]`;
+    $`!p snip.rv = t[1][0:1].lower() + t[1][1:]` = $this->get${2:OldField}();
+    if(null === $`!p snip.rv = t[1][0:1].lower() + t[1][1:]`) {
+        throw new EntityNotFoundException('Could not find `!p snip.rv = t[1][0:1].lower() + t[1][1:]` for $4 with id: ' . $this->getId());
+    }
+    return $`!p snip.rv = t[1][0:1].lower() + t[1][1:]`;
 }
 
 public function set$1($1 $3$`!p snip.rv = t[1][0:1].lower() + t[1][1:]`)
 {
-	return $this->set$2($`!p snip.rv = t[1][0:1].lower() + t[1][1:]`);
+    return $this->set$2($`!p snip.rv = t[1][0:1].lower() + t[1][1:]`);
 }
 endsnippet
 
@@ -205,7 +253,7 @@ snippet ictask "Symfony1 task for iControllah"
 final class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\Task\BaseTask
 {
     protected function configure()
-	{
+    {
         $this->namespace = '$1';
         $this->name = '$2';
     }
@@ -214,17 +262,6 @@ final class ${1:`!v expand("%:t:r:r")`} extends \iController\Platform\Symfony1\T
      * {@inheritdoc}
      */
     protected function execute($arguments = [], $options = [])
-    {
-    }
-}
-endsnippet
-
-snippet icaction "Symfony1 action for iControllah"
-<?php
-
-class ${1:`!v substitute(expand("%:p"), '.*\/\(.*\)\/actions\/actions.class.php', '\1', '')`}Actions extends \iController\Platform\Symfony1\Action\BaseActions
-{
-    public function execute(sfWebRequest $request)
     {
     }
 }

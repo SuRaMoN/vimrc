@@ -3,14 +3,15 @@
 snoremap <C-C> <C-G>"+y<C-\><C-N>
 
 " ctrl-l: opens Least recently used files
-"map <C-L> :CtrlPMRUFiles<CR>
+map <C-UP> :History<CR>
+imap <C-UP> <ESC>:History<CR>
 map <C-L> :History<CR>
 map <C-P> :FZF<CR>
 smap <C-P> <ESC>:execute "FZF -q " @*<CR>
 map <C-Y> :FZFYank<CR>
 
-" ctrl-f: opens functions in current file
-"nnoremap <C-f> :CtrlPFunky<Cr>
+" overwrite crl-click with ALE
+"nnoremap <C-LeftMouse> <LeftMouse>:ALEGoToDefinition<CR>
 
 " specific mappings for tests
 nmap <F6> :w<CR>:TestNearest<CR>
@@ -30,3 +31,15 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 map <C-E> :cnext<CR>
+
+" cp copies current file to clipboard
+nmap cp :let @+ = expand("%")<cr>
+
+" Auto import namespaces in vim
+autocmd FileType php inoremap <Leader>u <Esc>:PhpactorImportClass<CR>
+autocmd FileType php noremap <Leader>u :PhpactorImportClass<CR>
+autocmd FileType php inoremap <Leader>a <Esc>:PhpactorImportMissingClasses<CR>
+autocmd FileType php noremap <Leader>a :PhpactorImportMissingClasses<CR>
+
+autocmd FileType php inoremap <C-LeftMouse> <Esc><LeftMouse>:PhpactorGotoDefinition<CR>
+autocmd FileType php noremap <C-LeftMouse> <LeftMouse>:PhpactorGotoDefinition<CR>

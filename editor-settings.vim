@@ -24,7 +24,8 @@ set textwidth=75
 set complete+=t,k
 set dictionary+=dictionary
 set formatoptions-=tc
-set completeopt+=longest,menuone
+set completeopt+=longest,menuone,noinsert,noselect
+set completeopt-=preview
 set hid
 set confirm
 set clipboard+=unnamed
@@ -33,3 +34,6 @@ set expandtab
 set keymodel-=stopsel " down arrow works in visual selections
 set tags+=tags,tags.vendors,tags.spl
 set guioptions-=T  " remove toolbar
+if has("gui_running")
+    set lines=35 columns=150
+endif
